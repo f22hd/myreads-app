@@ -74,8 +74,11 @@ export default class Search extends React.Component {
                 <div className='col-12 mt-3'>
                         <Link 
                         to='/'
-                        className='btn btn-primary back-link'
-                        >Back</Link>
+                        className='btn btn-link back-link'
+                        >
+                          <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
+                          Back
+                          </Link>
                 </div>
                
                 <div className='col-12 mt-5'>
