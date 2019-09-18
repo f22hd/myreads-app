@@ -13,6 +13,7 @@ export default class BookList extends React.Component {
       alert(response.error);
     } else {
       alert(`${book.title} has been updated`);
+      this.props.onRefreshData();
     }
   };
 
@@ -20,7 +21,7 @@ export default class BookList extends React.Component {
     return (
       <div className="row justify-content-center">
         {this.props.books.map((book, index) => (
-          <div className="col-sm-4 col-6 mt-4" key={index}>
+          <div className="col-sm-4 col-6 mt-4" key={book.id}>
             <div className="card">
               {book.imageLinks && (
                     <div
@@ -32,7 +33,7 @@ export default class BookList extends React.Component {
               )}
 
               {!book.imageLinks && (
-                  <img src={`https://via.placeholder.com/250/FFFFFF/000000/?text=${book.title}`} className='card-img-top' />     
+                  <img alt={book.title} src={`https://via.placeholder.com/250/FFFFFF/000000/?text=${book.title}`} className='card-img-top' />     
               )}
              
 

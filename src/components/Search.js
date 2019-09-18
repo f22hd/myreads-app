@@ -1,8 +1,8 @@
 import React from "react";
-import SearchForm from "./SearchForm";
-import BookList from './BookList';
 import * as BooksAPI from '../BooksAPI';
 import {Link} from 'react-router-dom';
+import BookList from './BookList';
+import SearchForm from "./SearchForm";
 
 export default class Search extends React.Component {
   state = {
@@ -20,8 +20,6 @@ export default class Search extends React.Component {
       if(result.error){
         this.setState({searchResultText:result.error});
       }else{
-        // have results
-        // this.updateSearchResult(result);
         this.mappingShelf(result);
       }
     
@@ -39,10 +37,10 @@ export default class Search extends React.Component {
 
   mappingShelf = (result) => {
       const mapped = result.map(book => {
-        const sameBookIndex = this.props.books.findIndex(b => b.id === book.id);
-        if(sameBookIndex > -1 && this.props.books[sameBookIndex].shelf){
-          book.shelf = this.props.books[sameBookIndex].shelf;
-        }
+      const sameBook = this.props.books.find(b => b.id === book.id);
+      if(sameBook){
+        book.shelf = sameBook.shelf;
+      }
         return book;
       });
 
@@ -65,20 +63,22 @@ export default class Search extends React.Component {
   };
 
   componentDidMount(){
-    console.log(this.props.books);
+    console.log('search componentDidMount',this.props.books);
+  }
+
+  componentWillUnmount(){
+    console.log('search componentWillUnmount',this.props);
+    
   }
 
   render() {
     return ( 
         <div className='row'>
                 <div className='col-12 mt-3'>
-                        <Link 
-                        to='/'
-                        className='btn btn-link back-link'
-                        >
-                          <i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
+                        <Link to='/' className='btn btn-link'>
+                          <i className="fa fa-arrow-left mr-2" aria-hidden="true"></i>
                           Back
-                          </Link>
+                        </Link>
                 </div>
                
                 <div className='col-12 mt-5'>
@@ -94,7 +94,7 @@ export default class Search extends React.Component {
                                 <h4>Search Result ({this.state.searchResult.length})</h4>
                                 <BookList
                                     books={this.state.searchResult}
-                                    onUpdate={this.update}
+                                    onRefreshData={this.props.onLoadData}
                                 />
                             </div>
                         )}

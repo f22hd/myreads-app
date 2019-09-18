@@ -1,7 +1,6 @@
 import React from 'react';
 import BookList from "./BookList";
-import * as BooksAPI from "../BooksAPI";
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class Home extends React.Component{
 
@@ -28,17 +27,11 @@ export default class Home extends React.Component{
       };
 
     refreshData = () => {
-        console.log('refreshData')
         this.props.onLoadData();
     }  
 
     componentDidMount(){
-       // this.loadData();
        this.filters(this.props.books);
-    }
-
-    componentWillUnmount(){
-        console.log('Home unmount component')
     }
 
     render(){

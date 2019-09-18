@@ -3,7 +3,7 @@ import "./App.css";
 import Home from "./components/Home";
 import Search from "./components/Search";
 import * as BooksAPI from "./BooksAPI";
-import { Link, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 export default class App extends React.Component {
   state = {
@@ -12,7 +12,7 @@ export default class App extends React.Component {
 
   loadData = async () => {
     const books = await BooksAPI.getAll();
-    this.setState({books:books});
+    this.setState({books});
   };
 
   // Life cycles component:Now your component has been mounted and ready
@@ -31,9 +31,13 @@ export default class App extends React.Component {
 
             {/* {this.props.location.pathname} */}
             <Route 
+              exact
               path="/search"
               component={() => 
-                <Search books={this.state.books} />
+                <Search 
+                books={this.state.books}
+                onLoadData={this.loadData}
+                />
               }
               
               />
