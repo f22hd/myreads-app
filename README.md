@@ -1,7 +1,10 @@
-##MyReads App
+## MyReads: A Book Tracking App
 
-This is first project in react course for nano degree.
+An web application that allows you to select and categorize books you have read, are currently reading, or want to read. 
 
-you can run the application by following command:
+we are using Bootstrap and FontAwesome for making UI is very nice and clear to users.
+
+You can run the application by following command:
 
 npm install && npm start
+
